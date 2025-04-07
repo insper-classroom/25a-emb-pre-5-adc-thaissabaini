@@ -25,6 +25,7 @@ void data_task(void *p) {
 
 void process_task(void *p) {
     int data = 0;
+    int numero = 0;
     int b[5] = {0, 0, 0, 0, 0};
     int valor = 0;
 
@@ -32,21 +33,27 @@ void process_task(void *p) {
         if (xQueueReceive(xQueueData, &data, 100)) {
             // implementar filtro aqui!
 
-           
+            if (numero < 5) {
+                b[numero] = data;
+                numero++;
+                valor = numero;
+            } else {
                 
-            b[0] = b[1];
-            b[1] = b[2];
-            b[2] = b[3];
-            b[3] = b[4];
-            b[4] = data;
-            
+                b[0] = b[1];
+                b[1] = b[2];
+                b[2] = b[3];
+                b[3] = b[4];
+                b[4] = data;
+                valor = 5;
+            }
 
             int soma = 0;
             for (int i = 0; i < valor; i++) {
                 soma += b[i];
             }
 
-            printf("%d\n", soma / valor);
+            int final = soma / 5;
+            printf("%d\n", final);
             // deixar esse delay!
             vTaskDelay(pdMS_TO_TICKS(50));
         }

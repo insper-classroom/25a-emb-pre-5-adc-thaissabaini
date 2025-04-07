@@ -32,17 +32,14 @@ void process_task(void *p) {
         if (xQueueReceive(xQueueData, &data, 100)) {
             // implementar filtro aqui!
 
-            if (valor < 5) {
-                b[valor] = data;
-                valor++;
-            } else {
+           
                 
-                b[0] = b[1];
-                b[1] = b[2];
-                b[2] = b[3];
-                b[3] = b[4];
-                b[4] = data;
-            }
+            b[0] = b[1];
+            b[1] = b[2];
+            b[2] = b[3];
+            b[3] = b[4];
+            b[4] = data;
+            
 
             int soma = 0;
             for (int i = 0; i < valor; i++) {
